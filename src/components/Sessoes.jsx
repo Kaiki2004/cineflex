@@ -1,14 +1,25 @@
 import { useState, useEffect } from "react";
-import Sessoes from './Listasessoes'
+import { useParams } from "react-router-dom";
+import Sessoes from "./Listasessoes";
+import axios from "axios";
 
-export default function Sessoes() {
+export default function SessoesFilme() {
+    const { idFilme } = useParams();
+    const [lista, setLista] = useState([]);
+
     useEffect(() => {
-        const lista = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${ID_DO_FILME}/showtimes`).then((res) => {
-            console.log(res.data);
-        }).catch((error) => {
-            console.log(error.response.data);
-        });
-    })
+        if (!idFilme) return;
+        axios
+            .get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`)
+            .then((res) => {
+                console.log(res.data);
+                setLista(res.data.days);
+            })
+            .catch((error) => {
+                console.log(error?.response?.data);
+            });
+    }, [idFilme]);
+
     return (
         <div>
             {lista.map((hora, index) => (

@@ -1,0 +1,12 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #343640;
+    font-family: 'Sarala', sans-serif;
+    color: #FFF;
+    overflow-x: hidden;
+}

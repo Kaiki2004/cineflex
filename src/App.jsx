@@ -1,28 +1,44 @@
 import { useState, useEffect } from 'react';
-import getFilme from './server/Apis/getFilme.js'; 
-import Filme from './components/Filme'; 
+import Filme from './components/Filmes.jsx';
 import Logo from './components/Head.jsx'
+import axios from 'axios';
+import styled from 'styled-components';
 
-function App() {
-  const [listaFilmes, setListaFilmes] = useState([]);
+export default function App() {
+  const [lista, setLista] = useState([]);
 
   useEffect(() => {
-    function buscaFilme() {
-      const filmes =  getFilme(); 
-      setListaFilmes(filmes);
-    }
-
-    buscaFilme();
+    axios.get('https://mock-api.driven.com.br/api/v8/cineflex/movies')
+      .then((res) => {
+        /*console.log(res.data);*/
+        setLista(res.data);
+      })
+      .catch((error) => {
+        console.log(error?.response?.data);
+      });
   }, []);
 
   return (
     <div>
       <Logo />
-      {listaFilmes.map((filme, index) => (
+      <Titulo> EM CARTAZ </Titulo>
+      {lista.map((filme, index) => (
         <Filme key={index} filme={filme} />
       ))}
     </div>
   );
 }
 
-export default App;
+
+const Titulo = styled.h1`
+    font-family: 'Sarala';
+    font-size: 48px;
+    color: #FFFFFF;
+    weight: 400;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 25px;
+`
+
