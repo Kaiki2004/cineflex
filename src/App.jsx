@@ -21,7 +21,7 @@ export default function App() {
   return (
     <div>
       <Logo />
-      <Titulo> EM CARTAZ </Titulo>
+      <Title> EM CARTAZ </Title>
       {lista.map((filme, index) => (
         <Filme key={index} filme={filme} />
       ))}
@@ -30,15 +30,11 @@ export default function App() {
 }
 
 
-const Titulo = styled.h1`
-    font-family: 'Sarala';
-    font-size: 48px;
-    color: #FFFFFF;
-    weight: 400;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 25px;
-`
+const Title = styled.h1`
+  background: #1f2126;  
+  font-size: 50px;
+  font-weight: 800;
+  text-align: center;
+  margin: 10px 0 8px;
+`;
 
