@@ -34,7 +34,7 @@ export default function App() {
 
 const Title = styled.h1`
   background: #1f2126;  
-  font-size: 50px;
+  font-size: 25px;
   font-weight: 800;
   text-align: center;
   margin: 10px 0 8px;
@@ -42,10 +42,9 @@ const Title = styled.h1`
 
 const Conteiner = styled.div`
   display: flex;
-  flex-wrap: wrap; /* permite quebrar linha */
+  flex-wrap: wrap; 
   align-items: center;
-  justify-content: center; /* centraliza horizontalmente */
+  justify-content: center; 
   padding: 22px 16px 40px;
-  gap: 16px; /* espaço entre os pôsteres */
-  min-height: 100vh; /* ocupa a altura da tela */
+  gap: 16px; 
 `;

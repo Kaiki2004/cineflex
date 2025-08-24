@@ -110,30 +110,23 @@ export default function Listassentos({ assentos, filme, sessao }) { // <<< receb
   );
 }
 
-/* ===== CSS permanece igual ===== */
-
 const Page = styled.main`
-  min-height: calc(100vh - 70px);
-  width: 100%;
   background: #1f2126;
   color: #e9eaee;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 22px 16px 40px;
-  gap: 16px;
+  padding: 10px;
 `;
 
 const Title = styled.h1`
   font-size: 22px;
   font-weight: 800;
-  text-align: center;
-  margin: 6px 0 8px;
 `;
 
 const SeatsWrapper = styled.section`
-  width: 100%;
-  max-width: 420px;
+  width: 90%;
+  
 `;
 
 const Divider = styled.hr`
@@ -141,15 +134,13 @@ const Divider = styled.hr`
   max-width: 420px;
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
-  margin: 14px 0 8px;
 `;
 
 const Form = styled(BaseForm)`
-  width: 100%;
+  width: 70%;
   max-width: 420px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 
   label {
     font-size: 14px;
@@ -157,7 +148,6 @@ const Form = styled(BaseForm)`
   }
 
   input {
-    width: 100%;
     background: #ffffff;
     color: #1f2126;
     border: none;

@@ -36,8 +36,6 @@ const Page = styled.main`
   background: #1f2126;
   color: #e9eaee;
   display: inline-block;
-  /* align-items não tem efeito em inline-block */
-  padding: 22px 16px 40px;
   gap: 16px;
 `;
 
@@ -47,8 +45,8 @@ const SessaoContainer = styled.div`
   margin: 15px 0;
   padding: 15px;
   border-radius: 10px;
-  display: inline-block;
-  margin: 10px;
+  width: 300px;
+
 `;
 
 const Dia = styled.p`
@@ -63,6 +61,8 @@ const HorarioContainer = styled.div`
   gap: 10px;
   border-top: 1px solid #444;
   padding-top: 15px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const BotaoHorario = styled.button`

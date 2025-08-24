@@ -8,7 +8,7 @@ export default function Head() {
 }
 
 const Topo = styled.h1`
-    font-family: 'Righteous';
+    font-family: 'Sarala';
     font-size: 32px;
     weight: 400;
     background-color: #E88373;
@@ -18,6 +18,7 @@ const Topo = styled.h1`
     gap: 10px;
     color: #FADBC5;
     padding: 10px;
+    min-width: 400px;
     img{
         width: 40px;
         height: 40px;

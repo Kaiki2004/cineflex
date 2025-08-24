@@ -8,7 +8,7 @@ import Seats from "./Listassentos.jsx";
 export default function Assentos() {
   const [assentos, setAssentos] = useState([]);
   const [filme, setFilme] = useState(null);
-  const [sessao, setSessao] = useState(null); // <<< NOVO
+  const [sessao, setSessao] = useState(null); 
   const { idSessao } = useParams();
 
   useEffect(() => {
@@ -33,7 +33,6 @@ export default function Assentos() {
   return (
     <div>
       <Logo />
-      <Conteiner>
         {filme && sessao && (
           <Seats
             key={idSessao}
@@ -42,17 +41,6 @@ export default function Assentos() {
             sessao={sessao}   
           />
         )}
-      </Conteiner>
     </div>
   );
 }
-
-const Conteiner = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding: 22px 16px 40px;
-  gap: 16px;
-  min-height: 100vh;
-`;

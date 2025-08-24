@@ -70,8 +70,7 @@ const Page = styled.main`
 const Title = styled.h1`
   margin-top: 6px;
   font-size: 22px;
-  font-weight: 800;
-  color: #50fa7b; /* verde de sucesso */
+  color: #9DB899;
   text-align: center;
 `;
 
@@ -91,7 +90,7 @@ const Section = styled.div`
 const SectionTitle = styled.h3`
   font-size: 18px;
   font-weight: 700;
-  color: #e8833a; /* laranja salmão do app */
+  color: #EE897F;
   margin: 6px 0 10px;
 `;
 
@@ -139,7 +138,7 @@ const PrimaryButton = styled(Link)`
   max-width: 420px;
   display: inline-block;
   text-align: center;
-  background: #e8833a;
+  background: #EE897F;
   color: #1f2126;
   font-weight: 800;
   padding: 14px 16px;

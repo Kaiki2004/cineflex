@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const SeatsContainer = styled.div`
-  display: flex;          /* inline-flex não é necessário aqui */
+  display: flex;          
   flex-wrap: wrap;
   gap: 8px;
-  justify-content: center;/* 'justify-items' não funciona em flex */
+  justify-content: center;
   align-items: center;
   margin: 20px 0;
 `;
