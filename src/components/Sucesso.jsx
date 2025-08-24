@@ -1,87 +1,97 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Sucesso() {
-  const [searchParams] = useSearchParams();
-  const nome = searchParams.get("nome") || "";
-  const cpf = searchParams.get("cpf") || "";
-  const assentosStr = searchParams.get("assentos") || "";
-  const assentos = assentosStr ? assentosStr.split(",") : [];
+  const { state } = useLocation() || {};
+  if (!state) return <p>Nenhum pedido encontrado.</p>;
+
+  const { movie, session, seats, buyer } = state;
 
   return (
     <Page>
-      <TitleLink>Pedido finalizado</TitleLink>
+      <Title>Pedido Finalizado!</Title>
 
       <Card>
         <Section>
+          <SectionTitle>Filme e sessão</SectionTitle>
+          <InfoLine>{movie?.title}</InfoLine>
+          <InfoLine>
+            {session?.weekday} — {session?.date} às {session?.time}
+          </InfoLine>
+        </Section>
+
+        <Divider />
+
+        <Section>
           <SectionTitle>Ingressos</SectionTitle>
-          {assentos.length === 0 ? (
-            <Muted>Nenhum assento encontrado.</Muted>
-          ) : (
+          {seats?.length ? (
             <List>
-              {assentos.map((a, i) => (
-                <li key={i}>Assento {a}</li>
+              {seats.map((a) => (
+                <li key={a}>Assento {a}</li>
               ))}
             </List>
+          ) : (
+            <Muted>Nenhum assento encontrado.</Muted>
           )}
         </Section>
 
         <Divider />
 
         <Section>
-          <SectionTitle>Comprador(a)</SectionTitle>
+          <SectionTitle>Comprador</SectionTitle>
           <InfoLine>
-            <strong>Nome:</strong> <span>{nome || "—"}</span>
+            <strong>Nome:</strong> <span>{buyer?.name || "—"}</span>
           </InfoLine>
           <InfoLine>
-            <strong>CPF:</strong> <span>{cpf || "—"}</span>
+            <strong>CPF:</strong> <span>{buyer?.cpf || "—"}</span>
           </InfoLine>
         </Section>
       </Card>
 
-      <PrimaryButton to="/">Voltar para tela inicial</PrimaryButton>
+      <PrimaryButton to="/">Voltar para Home</PrimaryButton>
     </Page>
   );
 }
 
+/* ===== CSS (sem duplicações) ===== */
+
 const Page = styled.main`
   min-height: calc(100vh - 70px);
+  width: 100%;
   background: #1f2126;
   color: #e9eaee;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 22px 16px 40px;
   gap: 16px;
-  padding: 24px 16px 40px;
 `;
 
-const TitleLink = styled.h1`
+const Title = styled.h1`
   margin-top: 6px;
-  font-size: 18px;
-  font-weight: 700;
-  color: #9DB899; 
-  &:hover {
-    opacity: 0.9;
-  }
+  font-size: 22px;
+  font-weight: 800;
+  color: #50fa7b; /* verde de sucesso */
+  text-align: center;
 `;
 
 const Card = styled.section`
   width: 100%;
   max-width: 420px;
-  background: #2b2f36;
+  background: #2c2f38;
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 `;
 
 const Section = styled.div`
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 `;
 
 const SectionTitle = styled.h3`
   font-size: 18px;
   font-weight: 700;
-  color: #e88373; /* accent salmão do app */
+  color: #e8833a; /* laranja salmão do app */
   margin: 6px 0 10px;
 `;
 
@@ -100,6 +110,7 @@ const List = styled.ul`
     padding: 6px 0;
     border-radius: 6px;
     font-size: 16px;
+    color: #d2d4dc;
   }
 `;
 
@@ -128,7 +139,7 @@ const PrimaryButton = styled(Link)`
   max-width: 420px;
   display: inline-block;
   text-align: center;
-  background: #e88373;
+  background: #e8833a;
   color: #1f2126;
   font-weight: 800;
   padding: 14px 16px;

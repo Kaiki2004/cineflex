@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export default function Listasessoes({ sessoes }) {
+export default function Listasessoes({ sessoes, movie }) { // <<< movie por prop
   return (
     <Page>
       <SessaoContainer>
@@ -10,7 +10,19 @@ export default function Listasessoes({ sessoes }) {
         </Dia>
         <HorarioContainer>
           {sessoes.showtimes.map((horario) => (
-            <Link key={horario.id} to={`/assentos/${horario.id}`}>
+            <Link
+              key={horario.id}
+              to={`/assentos/${horario.id}`}
+              state={{
+                movie: { id: movie.id, title: movie.title }, // <<< passa título do filme
+                session: {
+                  id: horario.id,
+                  date: sessoes.date,
+                  weekday: sessoes.weekday,
+                  time: horario.name, // normalmente "15:00"
+                },
+              }}
+            >
               <BotaoHorario>{horario.name}</BotaoHorario>
             </Link>
           ))}
@@ -21,10 +33,10 @@ export default function Listasessoes({ sessoes }) {
 }
 
 const Page = styled.main`
-  background: #1f2126;        
+  background: #1f2126;
   color: #e9eaee;
   display: inline-block;
-  align-items: center;
+  /* align-items não tem efeito em inline-block */
   padding: 22px 16px 40px;
   gap: 16px;
 `;
@@ -35,7 +47,7 @@ const SessaoContainer = styled.div`
   margin: 15px 0;
   padding: 15px;
   border-radius: 10px;
-  display: inline-block; 
+  display: inline-block;
   margin: 10px;
 `;
 

@@ -22,9 +22,11 @@ export default function App() {
     <div>
       <Logo />
       <Title> EM CARTAZ </Title>
-      {lista.map((filme, index) => (
-        <Filme key={index} filme={filme} />
-      ))}
+      <Conteiner>
+        {lista.map((filme) => (
+          <Filme key={filme.id} filme={filme} />
+        ))}
+      </Conteiner>
     </div>
   );
 }
@@ -38,3 +40,12 @@ const Title = styled.h1`
   margin: 10px 0 8px;
 `;
 
+const Conteiner = styled.div`
+  display: flex;
+  flex-wrap: wrap; /* permite quebrar linha */
+  align-items: center;
+  justify-content: center; /* centraliza horizontalmente */
+  padding: 22px 16px 40px;
+  gap: 16px; /* espaço entre os pôsteres */
+  min-height: 100vh; /* ocupa a altura da tela */
+`;

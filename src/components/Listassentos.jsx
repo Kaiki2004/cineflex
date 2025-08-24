@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function Listassentos({ assentos }) {
+export default function Listassentos({ assentos, filme, sessao }) { // <<< recebe filme e sessao
   const [selecionados, setSelecionados] = useState([]);
   const [nome, setNome] = useState("");
-  const [cpf, setCpf] = useState("");         // <-- faltava
+  const [cpf, setCpf] = useState("");
   const [enviando, setEnviando] = useState(false);
   const navigate = useNavigate();
 
@@ -34,12 +34,22 @@ export default function Listassentos({ assentos }) {
     axios
       .post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", payload)
       .then(() => {
-        const params = new URLSearchParams({
-          nome: payload.name,
-          cpf: payload.cpf,
-          assentos: nomesAssentos.join(","),
+        navigate("/sucesso", {
+          state: {
+            movie: {
+              id: filme?.id,
+              title: filme?.title,
+            },
+            session: {
+              id: sessao?.id,
+              date: sessao?.date,
+              weekday: sessao?.weekday,
+              time: sessao?.time,
+            },
+            seats: nomesAssentos,
+            buyer: { name: payload.name, cpf: payload.cpf },
+          },
         });
-        navigate(`/sucesso?${params.toString()}`);
       })
       .catch((error) => {
         const msg =
@@ -100,12 +110,12 @@ export default function Listassentos({ assentos }) {
   );
 }
 
-/* ===== CSS para ficar como no print ===== */
+/* ===== CSS permanece igual ===== */
 
 const Page = styled.main`
   min-height: calc(100vh - 70px);
   width: 100%;
-  background: #1f2126;        
+  background: #1f2126;
   color: #e9eaee;
   display: flex;
   flex-direction: column;
@@ -151,14 +161,14 @@ const Form = styled(BaseForm)`
     background: #ffffff;
     color: #1f2126;
     border: none;
-    border-radius: 10px;       /* cantos arredondados */
+    border-radius: 10px;
     padding: 12px 14px;
     font-size: 14px;
     outline: none;
     box-shadow: 0 1px 0 rgba(0,0,0,.18);
 
     &::placeholder {
-      color: #9aa1ad;          /* placeholder suave */
+      color: #9aa1ad;
     }
   }
 `;
