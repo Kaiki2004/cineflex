@@ -3,8 +3,9 @@ import { SeatsContainer, Seat, FormContainer as BaseForm, Button } from "../styl
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AiOutlineLeft } from "react-icons/ai";
 
-export default function Listassentos({ assentos, filme, sessao }) { // <<< recebe filme e sessao
+export default function Listassentos({ assentos, filme, sessao }) {
   const [selecionados, setSelecionados] = useState([]);
   const [nome, setNome] = useState("");
   const [cpf, setCpf] = useState("");
@@ -65,8 +66,13 @@ export default function Listassentos({ assentos, filme, sessao }) { // <<< receb
 
   return (
     <Page>
-      <Title>Selecione o(s) assento(s)</Title>
-
+      <ContainerTop>
+        <Voltar onClick={() => window.history.back()} >
+          <AiOutlineLeft style={{ width: "10px", height: "10px", marginRight: "8px" }} />
+          Voltar
+        </Voltar>
+        <Title>Selecione o(s) assento(s)</Title>
+      </ContainerTop>
       <SeatsWrapper>
         <SeatsContainer>
           {assentos.map((assento) => (
@@ -117,15 +123,18 @@ const Page = styled.main`
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  margin-bottom: 20px;
+  overflow: auto;
 `;
 
 const Title = styled.h1`
   font-size: 22px;
   font-weight: 800;
+  margin: 10px 0 8px;
 `;
 
 const SeatsWrapper = styled.section`
-  width: 90%;
+  width: 40%;
   
 `;
 
@@ -161,4 +170,25 @@ const Form = styled(BaseForm)`
       color: #9aa1ad;
     }
   }
+`;
+
+const ContainerTop = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5%;
+  margin: 20px;
+`;
+
+const Voltar = styled.span`
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  :hover {
+    color: #fff;
+  }
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding: 10px;
 `;

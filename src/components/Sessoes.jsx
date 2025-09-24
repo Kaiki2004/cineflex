@@ -4,24 +4,24 @@ import Sessoes from "./Listasessoes";
 import axios from "axios";
 import styled from "styled-components";
 import Logo from "./Head.jsx";
+import { AiOutlineLeft } from "react-icons/ai";
 
 export default function SessoesFilme() {
     const { idFilme } = useParams();
     const [lista, setLista] = useState([]);
-    const [movie, setMovie] = useState(null); // <<< NOVO
+    const [movie, setMovie] = useState(null); 
 
     useEffect(() => {
         if (!idFilme) return;
         axios
             .get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idFilme}/showtimes`)
             .then((res) => {
-                // res.data tem: { title, posterURL, days: [...] }
                 setLista(res.data.days || []);
                 setMovie({
                     id: Number(idFilme),
                     title: res.data.title,
                     posterURL: res.data.posterURL,
-                }); // <<< NOVO
+                }); 
             })
             .catch((error) => {
                 console.log(error?.response?.data);
@@ -31,7 +31,13 @@ export default function SessoesFilme() {
     return (
         <div>
             <Logo />
-            <Titulo>Selecione o horário</Titulo>
+            <ContainerTop>
+                <Voltar onClick={() => window.history.back()} >
+                    <AiOutlineLeft style={{ width: "10px", height: "10px", marginRight: "8px" }} />
+                    Voltar
+                </Voltar>
+                <Titulo>Selecione o horário</Titulo>
+            </ContainerTop>
             <Conteiner>
                 {movie && lista.map((dia) => (
                     <Sessoes key={dia.date} sessoes={dia} movie={movie} />
@@ -41,16 +47,32 @@ export default function SessoesFilme() {
     );
 }
 
+const ContainerTop = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 31%;
+  margin: 20px;
+`;
+
+const Voltar = styled.span`
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  :hover {
+    color: #fff;
+  }
+    border: 1px solid #fff;
+    border-radius: 10px;
+    padding: 10px;
+`;
+
 const Titulo = styled.h1`
-  font-family: 'Sarala';
   font-size: 32px;
   color: #FFFFFF;
-  font-weight: 400; /* <<< 'weight' -> 'font-weight' */
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 25px;
+  font-weight: 400;
+  margin: 0;
 `;
 
 const Conteiner = styled.div`
@@ -58,4 +80,5 @@ const Conteiner = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  gap: 16px;
 `;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export default function Listasessoes({ sessoes, movie }) { // <<< movie por prop
+export default function Listasessoes({ sessoes, movie }) { 
   return (
     <Page>
       <SessaoContainer>
@@ -14,12 +14,12 @@ export default function Listasessoes({ sessoes, movie }) { // <<< movie por prop
               key={horario.id}
               to={`/assentos/${horario.id}`}
               state={{
-                movie: { id: movie.id, title: movie.title }, // <<< passa título do filme
+                movie: { id: movie.id, title: movie.title }, 
                 session: {
                   id: horario.id,
                   date: sessoes.date,
                   weekday: sessoes.weekday,
-                  time: horario.name, // normalmente "15:00"
+                  time: horario.name, 
                 },
               }}
             >
