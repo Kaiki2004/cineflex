@@ -12,6 +12,7 @@ Projeto desenvolvido com **React.js**, utilizando a API mockada fornecida pela D
 ---
 
 ## 🚀 Demonstração
+https://cineflex-liard.vercel.app/
 
 ### 📽️ Projeto em funcionamento:
 
